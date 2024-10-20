@@ -1,0 +1,30 @@
+@keyframes borderGrow {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+  
+  .animated-border {
+    position: relative;
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;  /* Adjust this value to fit the positioning of the border */
+      left: 0;
+      width: 0;
+      height: 2px;   /* Adjust this value to fit the height of the border */
+      background-color: #ffea00; /* Color of the border when active */
+      animation: borderGrow 2s infinite; /* Adjust the duration of the animation as needed */
+    }
+  }
+  
+  @keyframes border-blink {
+    0% { border-color: transparent; }
+    50% { border-color: #d0ff00; }
+    100% { border-color: transparent; }
+  }
+
+  
