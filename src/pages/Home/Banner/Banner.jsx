@@ -14,7 +14,7 @@ const Banner = () => {
 
   useEffect(() => {
     const script = document.createElement("script");
-    script.src = "http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js";
+    script.src = "https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js";
     script.async = true;
     document.body.appendChild(script);
 
