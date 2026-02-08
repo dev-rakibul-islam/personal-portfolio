@@ -1,156 +1,206 @@
-import React from "react";
+import React, { useState } from "react";
+import {
+  FiMail,
+  FiMapPin,
+  FiPhone,
+  FiSend,
+} from "react-icons/fi";
 import {
   FaFacebookF,
   FaTwitter,
-  FaInstagram,
   FaLinkedinIn,
-  FaMapMarkerAlt,
-  FaEnvelope,
-  FaPhone,
+  FaGithub,
 } from "react-icons/fa";
+import SectionWrapper from "../../../component/SectionWrapper";
+
+const contactInfo = [
+  {
+    icon: FiMapPin,
+    label: "Location",
+    value: "East Bakalia, Chittagong, Bangladesh",
+  },
+  {
+    icon: FiMail,
+    label: "Email",
+    value: "rakibulislam.eb@gmail.com",
+    href: "mailto:rakibulislam.eb@gmail.com",
+  },
+  {
+    icon: FiPhone,
+    label: "Phone",
+    value: "+880 18639-72739",
+    href: "tel:+8801863972739",
+  },
+];
+
+const socialLinks = [
+  { icon: FaLinkedinIn, href: "https://www.linkedin.com/in/rakibul-islam-6258541b4/", label: "LinkedIn" },
+  { icon: FaGithub, href: "https://github.com/ri5257", label: "GitHub" },
+  { icon: FaTwitter, href: "https://x.com/dev_rakib_eb", label: "Twitter" },
+  { icon: FaFacebookF, href: "https://www.facebook.com/rakibulislam.eb.rakib/", label: "Facebook" },
+];
 
 const Contaact = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const mailtoLink = `mailto:rakibulislam.eb@gmail.com?subject=Portfolio Contact from ${formData.name}&body=${encodeURIComponent(formData.message)}%0A%0AFrom: ${formData.email}`;
+    window.open(mailtoLink);
+  };
+
   return (
-    <div className="relative w-full min-h-screen p-8 bg-black flex items-center justify-center overflow-hidden">
-      {/* Background Circles */}
-      <div className="hidden lg:block">
-        <span className="absolute w-[130px] h-[130px] bg-gradient-to-br from-transparent to-green-600 rounded-full top-[10%] left-[-40px]"></span>
-        <span className="absolute w-[80px] h-[80px] bg-gradient-to-br from-transparent to-green-600 rounded-full top-[30%] left-[30px]"></span>
-        <span className="absolute w-[130px] h-[130px] bg-gradient-to-br from-transparent to-green-600 rounded-full top-[50%] right-[-40px]"></span>
-        <span className="absolute w-[80px] h-[80px] bg-gradient-to-br from-transparent to-green-600 rounded-full top-[70%] right-[30px]"></span>
-        <span className="absolute w-[360px] h-[360px] bg-white rounded-full top-[50%] left-[50%] translate-x-[-180px] translate-y-[-180px] opacity-10"></span>
-      </div>
-      <img
-        src="img/shape.png"
-        alt="Square"
-        className="absolute h-[400px] top-[50%] left-[50%] translate-x-[181%] translate-y-[11%] opacity-10"
-      />
+    <SectionWrapper id="contact">
+      <div className="max-w-5xl">
+        <h2 className="section-heading">Contact</h2>
+        <h3 className="text-3xl sm:text-4xl font-bold text-text-primary mb-4 leading-tight text-balance">
+          Get in <span className="text-accent">touch</span>
+        </h3>
+        <p className="text-text-secondary mb-12 max-w-2xl leading-relaxed">
+          Have a project in mind or just want to connect? I am always open to
+          discussing new opportunities, collaborations, or answering any
+          questions you may have.
+        </p>
 
-      <div className="relative grid grid-cols-1 md:grid-cols-2 w-full max-w-4xl bg-gray-900 rounded-lg shadow-lg overflow-hidden z-10">
-        {/* Contact Info */}
-        <div className="p-8">
-          <h3 className="text-green-500 font-semibold text-2xl mb-4">
-            Let's get in touch
-          </h3>
-          <p className="text-gray-300 mb-6">
-            Have a project in mind or just want to connect? Feel free to drop me
-            a message! I’m always open to discussing new opportunities,
-            collaborations, or answering any questions you may have. Let’s
-            create something amazing together!
-          </p>
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
+          {/* Contact info */}
+          <div className="lg:col-span-2 space-y-8">
+            {/* Info items */}
+            <div className="space-y-6">
+              {contactInfo.map(({ icon: Icon, label, value, href }) => (
+                <div key={label} className="flex items-start gap-4 group">
+                  <div className="flex-shrink-0 p-3 rounded-lg bg-accent/10 text-accent group-hover:bg-accent/20 transition-colors duration-200">
+                    <Icon size={18} />
+                  </div>
+                  <div>
+                    <p className="text-xs font-mono text-text-muted uppercase tracking-wider mb-1">
+                      {label}
+                    </p>
+                    {href ? (
+                      <a
+                        href={href}
+                        className="text-text-secondary hover:text-accent transition-colors duration-200 text-sm"
+                      >
+                        {value}
+                      </a>
+                    ) : (
+                      <p className="text-text-secondary text-sm">{value}</p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
 
-          <div className="space-y-4 mb-8">
-            <div className="flex items-center text-gray-300">
-              <FaMapMarkerAlt className="text-green-500 mr-4" />
-              <p>East Bakalia, Chittagong, Bangladesh</p>
-            </div>
-            <div className="flex items-center text-gray-300">
-              <FaEnvelope className="text-green-500 mr-4" />
-              <p>rakibulislam.eb@gmail.com</p>
-            </div>
-            <div className="flex items-center text-gray-300">
-              <FaPhone className="text-green-500 mr-4" />
-              <p>+880 18639-72739</p>
-            </div>
-          </div>
-
-          <div>
-            <p className="text-gray-300">Connect with me:</p>
-            <div className="flex space-x-4 mt-2">
-              <a
-                href="#"
-                className="text-white bg-gradient-to-br from-green-500 to-green-600 p-3 rounded-md hover:scale-105 transition-transform"
-              >
-                <FaFacebookF />
-              </a>
-              <a
-                href="#"
-                className="text-white bg-gradient-to-br from-green-500 to-green-600 p-3 rounded-md hover:scale-105 transition-transform"
-              >
-                <FaTwitter />
-              </a>
-              <a
-                href="#"
-                className="text-white bg-gradient-to-br from-green-500 to-green-600 p-3 rounded-md hover:scale-105 transition-transform"
-              >
-                <FaInstagram />
-              </a>
-              <a
-                href="#"
-                className="text-white bg-gradient-to-br from-green-500 to-green-600 p-3 rounded-md hover:scale-105 transition-transform"
-              >
-                <FaLinkedinIn />
-              </a>
+            {/* Social links */}
+            <div>
+              <p className="text-xs font-mono text-text-muted uppercase tracking-wider mb-4">
+                Connect with me
+              </p>
+              <div className="flex gap-3">
+                {socialLinks.map(({ icon: Icon, href, label }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="p-3 rounded-lg border border-slate-800/50 text-text-muted hover:text-accent hover:border-accent/30 hover:bg-accent/5 transition-all duration-200 focus-ring"
+                  >
+                    <Icon size={16} />
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Contact Form */}
-        <div className="relative p-8 bg-gray-800">
-          {/* Decorative Circles */}
-          <span className="absolute w-[130px] h-[130px] bg-gradient-to-br from-transparent to-green-600 rounded-full top-[130px] right-[-40px]"></span>
-          <span className="absolute w-[80px] h-[80px] bg-gradient-to-br from-transparent to-green-600 rounded-full top-[10px] right-[30px]"></span>
+          {/* Contact form */}
+          <div className="lg:col-span-3">
+            <form
+              onSubmit={handleSubmit}
+              className="p-6 sm:p-8 rounded-xl border border-slate-800/50 bg-bg-card/30 space-y-6"
+              autoComplete="off"
+            >
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                  <label
+                    htmlFor="name"
+                    className="block text-xs font-mono text-text-muted uppercase tracking-wider mb-2"
+                  >
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 bg-bg/50 border border-slate-700/50 rounded-lg text-text-primary text-sm placeholder-text-muted focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all duration-200"
+                    placeholder="Your name"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-xs font-mono text-text-muted uppercase tracking-wider mb-2"
+                  >
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 bg-bg/50 border border-slate-700/50 rounded-lg text-text-primary text-sm placeholder-text-muted focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all duration-200"
+                    placeholder="your@email.com"
+                  />
+                </div>
+              </div>
 
-          <form autoComplete="off" className="space-y-6">
-            <h3 className="text-white font-semibold text-2xl mb-4">
-              Contact with Me
-            </h3>
-            <div className="relative">
-              <input
-                type="text"
-                name="name"
-                className="w-full px-4 py-3 bg-transparent border-2 border-gray-500 rounded-md text-gray-300 placeholder-transparent focus:outline-none focus:border-green-300 peer"
-                placeholder="Username"
-              />
-              <label className="absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-400 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:left-4 peer-focus:top-0 peer-focus:left-4 peer-focus:text-xs peer-focus:text-green-300">
-                Username
-              </label>
-            </div>
+              <div>
+                <label
+                  htmlFor="message"
+                  className="block text-xs font-mono text-text-muted uppercase tracking-wider mb-2"
+                >
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows={5}
+                  className="w-full px-4 py-3 bg-bg/50 border border-slate-700/50 rounded-lg text-text-primary text-sm placeholder-text-muted focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all duration-200 resize-none"
+                  placeholder="Tell me about your project..."
+                />
+              </div>
 
-            <div className="relative">
-              <input
-                type="email"
-                name="email"
-                className="w-full px-4 py-3 bg-transparent border-2 border-gray-500 rounded-md text-gray-300 placeholder-transparent focus:outline-none focus:border-green-300 peer"
-                placeholder="Email"
-              />
-              <label className="absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-400 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:left-4 peer-focus:top-0 peer-focus:left-4 peer-focus:text-xs peer-focus:text-green-300">
-                Email
-              </label>
-            </div>
-
-            <div className="relative">
-              <input
-                type="tel"
-                name="phone"
-                className="w-full px-4 py-3 bg-transparent border-2 border-gray-500 rounded-md text-gray-300 placeholder-transparent focus:outline-none focus:border-green-300 peer"
-                placeholder="Phone"
-              />
-              <label className="absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-400 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:left-4 peer-focus:top-0 peer-focus:left-4 peer-focus:text-xs peer-focus:text-green-300">
-                Phone
-              </label>
-            </div>
-
-            <div className="relative">
-              <textarea
-                name="message"
-                className="w-full px-4 py-3 bg-transparent border-2 border-gray-500 rounded-md text-gray-300 placeholder-transparent focus:outline-none focus:border-green-300 peer min-h-[150px]"
-                placeholder="Message"
-              ></textarea>
-              <label className="absolute top-4 left-4 text-gray-400 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:left-4 peer-focus:top-0 peer-focus:left-4 peer-focus:text-xs peer-focus:text-green-300">
-                Message
-              </label>
-            </div>
-
-            <input
-              type="submit"
-              value="Send"
-              className="w-full px-4 py-3 bg-green-500 text-white border-2 border-green-500 rounded-md cursor-pointer transition-colors hover:bg-transparent hover:text-green-500"
-            />
-          </form>
+              <button
+                type="submit"
+                className="group inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-bg bg-accent rounded-lg hover:bg-accent-hover transition-all duration-200 focus-ring"
+              >
+                Send Message
+                <FiSend
+                  size={14}
+                  className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                />
+              </button>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+    </SectionWrapper>
   );
 };
 

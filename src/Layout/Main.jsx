@@ -4,13 +4,11 @@ import NavBar from "../component/NavBar/NavBar";
 
 const Main = () => {
   return (
-    <div>
-      <div className="sticky top-0 bg-green-100 bg-opacity-30 backdrop-blur-md rounded-b-lg border shadow-2xl z-20">
-        <NavBar></NavBar>
-      </div>
-      <div>
+    <div className="relative min-h-screen bg-bg">
+      <NavBar />
+      <main>
         <Outlet />
-      </div>
+      </main>
     </div>
   );
 };
