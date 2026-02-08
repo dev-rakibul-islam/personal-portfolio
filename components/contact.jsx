@@ -66,7 +66,7 @@ const contactInfo = [
 ]
 
 export function Contact() {
-  const ref = useRef<HTMLDivElement>(null)
+  const ref = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
   const [formState, setFormState] = useState({
     name: "",
@@ -85,7 +85,7 @@ export function Contact() {
     return () => observer.disconnect()
   }, [])
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     const mailtoLink = `mailto:rakibulislam.eb@gmail.com?subject=Portfolio Contact from ${encodeURIComponent(formState.name)}&body=${encodeURIComponent(formState.message)}%0A%0AFrom: ${encodeURIComponent(formState.email)}`
     window.open(mailtoLink, "_blank")
@@ -101,10 +101,7 @@ export function Contact() {
           description="Have a project in mind or just want to connect? I'm always open to discussing new opportunities."
         />
 
-        <div
-          ref={ref}
-          className="grid lg:grid-cols-5 gap-12"
-        >
+        <div ref={ref} className="grid lg:grid-cols-5 gap-12">
           {/* Contact Info */}
           <div className="lg:col-span-2 space-y-8">
             <div className="space-y-6">
@@ -124,16 +121,14 @@ export function Contact() {
                       <p className="text-sm text-muted-foreground mb-0.5">
                         {item.label}
                       </p>
-                      <p className="text-foreground font-medium">{item.value}</p>
+                      <p className="text-foreground font-medium">
+                        {item.value}
+                      </p>
                     </div>
                   </div>
                 )
                 return item.href ? (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    className="block"
-                  >
+                  <a key={item.label} href={item.href} className="block">
                     {content}
                   </a>
                 ) : (
@@ -151,7 +146,7 @@ export function Contact() {
               <p className="text-sm text-muted-foreground mb-3 px-4">
                 Connect with me
               </p>
-              <div className="flex gap-3 px-4">
+              <div className="flex flex-wrap gap-3 px-4">
                 {[
                   {
                     label: "LinkedIn",

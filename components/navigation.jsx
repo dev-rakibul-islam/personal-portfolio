@@ -37,7 +37,7 @@ export function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const handleNavClick = (href: string) => {
+  const handleNavClick = (href) => {
     setIsMobileOpen(false)
     const el = document.querySelector(href)
     if (el) {
@@ -49,9 +49,7 @@ export function Navigation() {
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isScrolled
-          ? "glass py-3"
-          : "bg-transparent py-5"
+        isScrolled ? "glass py-3" : "bg-transparent py-5"
       )}
     >
       <nav className="mx-auto max-w-6xl px-6 flex items-center justify-between">

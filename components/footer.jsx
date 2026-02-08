@@ -10,7 +10,7 @@ export function Footer() {
         </div>
 
         <p className="text-sm text-muted-foreground text-center">
-          Designed & Built by Rakibul Islam. All rights reserved &copy;{" "}
+          {"Designed & Built by Rakibul Islam. All rights reserved"} &copy;{" "}
           {new Date().getFullYear()}
         </p>
 

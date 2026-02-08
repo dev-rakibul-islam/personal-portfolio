@@ -4,17 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import { SectionHeading } from "./section-heading"
 
-interface Project {
-  title: string
-  description: string
-  imageUrl: string
-  liveLink: string
-  clientGithub?: string
-  serverGithub?: string
-  tags: string[]
-}
-
-const projects: Project[] = [
+const projects = [
   {
     title: "P-Ticket",
     description:
@@ -80,7 +70,7 @@ function GithubIcon() {
 }
 
 export function Projects() {
-  const ref = useRef<HTMLDivElement>(null)
+  const ref = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
@@ -108,16 +98,12 @@ export function Projects() {
             <div
               key={project.title}
               className={`group relative grid lg:grid-cols-12 gap-8 items-center opacity-0 ${
-                isVisible
-                  ? `animate-fade-up stagger-${(i + 1) * 2}`
-                  : ""
+                isVisible ? `animate-fade-up stagger-${(i + 1) * 2}` : ""
               }`}
             >
               {/* Image */}
               <div
-                className={`lg:col-span-7 ${
-                  i % 2 === 1 ? "lg:order-2" : ""
-                }`}
+                className={`lg:col-span-7 ${i % 2 === 1 ? "lg:order-2" : ""}`}
               >
                 <div className="relative overflow-hidden rounded-2xl bg-card border border-border group-hover:border-primary/20 transition-all duration-500">
                   <div className="relative aspect-[16/10]">

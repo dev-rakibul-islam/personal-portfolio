@@ -1,4 +1,3 @@
-import type { Metadata, Viewport } from "next"
 import { Inter, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
 
@@ -12,7 +11,7 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains",
 })
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Rakibul Islam | Full Stack Web Developer",
   description:
     "Portfolio of Rakibul Islam - A passionate MERN stack developer building seamless, efficient, and impactful web applications with modern technologies.",
@@ -35,20 +34,22 @@ export const metadata: Metadata = {
   },
 }
 
-export const viewport: Viewport = {
+export const viewport = {
   themeColor: "#0a0c10",
   width: "device-width",
   initialScale: 1,
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
-      <body className="font-sans bg-background text-foreground antialiased">{children}</body>
+    <html
+      lang="en"
+      className={`${inter.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
+      <body className="font-sans bg-background text-foreground antialiased">
+        {children}
+      </body>
     </html>
   )
 }

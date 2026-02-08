@@ -28,7 +28,7 @@ const educationData = [
 ]
 
 export function Education() {
-  const ref = useRef<HTMLDivElement>(null)
+  const ref = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
@@ -60,9 +60,7 @@ export function Education() {
               <div
                 key={item.institution}
                 className={`relative md:grid md:grid-cols-2 md:gap-12 md:mb-12 opacity-0 ${
-                  isVisible
-                    ? `animate-fade-up stagger-${(i + 1) * 2}`
-                    : ""
+                  isVisible ? `animate-fade-up stagger-${(i + 1) * 2}` : ""
                 }`}
               >
                 {/* Timeline dot */}

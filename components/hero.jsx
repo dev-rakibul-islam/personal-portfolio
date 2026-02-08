@@ -102,9 +102,7 @@ export function Hero() {
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
           {/* Left content */}
           <div className="flex-1 text-center lg:text-left">
-            <div
-              className={`opacity-0 ${isLoaded ? "animate-fade-up" : ""}`}
-            >
+            <div className={`opacity-0 ${isLoaded ? "animate-fade-up" : ""}`}>
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-mono tracking-wide mb-6">
                 <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                 Available for work
@@ -117,7 +115,7 @@ export function Hero() {
               }`}
             >
               <span className="block text-xl sm:text-2xl font-normal text-muted-foreground mb-2">
-                Hi, I{"'"}m
+                {"Hi, I'm"}
               </span>
               Rakibul Islam
             </h1>
@@ -134,10 +132,8 @@ export function Hero() {
             </div>
 
             <p
-              className={`mt-6 text-muted-foreground text-lg leading-relaxed max-w-lg opacity-0 ${
+              className={`mt-6 text-muted-foreground text-lg leading-relaxed max-w-lg opacity-0 lg:mx-0 mx-auto ${
                 isLoaded ? "animate-fade-up stagger-3" : ""
-              } ${
-                "lg:mx-0 mx-auto"
               }`}
             >
               I build accessible, pixel-perfect digital experiences for the web.
@@ -145,10 +141,8 @@ export function Hero() {
             </p>
 
             <div
-              className={`mt-8 flex items-center gap-4 opacity-0 ${
+              className={`mt-8 flex items-center gap-4 opacity-0 lg:justify-start justify-center ${
                 isLoaded ? "animate-fade-up stagger-4" : ""
-              } ${
-                "lg:justify-start justify-center"
               }`}
             >
               {socialLinks.map((link) => (

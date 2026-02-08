@@ -3,12 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { SectionHeading } from "./section-heading"
 
-interface SkillCategory {
-  title: string
-  skills: string[]
-}
-
-const skillCategories: SkillCategory[] = [
+const skillCategories = [
   {
     title: "Frontend",
     skills: [
@@ -63,7 +58,7 @@ const skillCategories: SkillCategory[] = [
 ]
 
 export function Skills() {
-  const ref = useRef<HTMLDivElement>(null)
+  const ref = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
@@ -89,17 +84,12 @@ export function Skills() {
           description="A comprehensive toolkit for building modern, scalable web applications from frontend to backend."
         />
 
-        <div
-          ref={ref}
-          className="grid md:grid-cols-2 gap-8"
-        >
+        <div ref={ref} className="grid md:grid-cols-2 gap-8">
           {skillCategories.map((category, catIndex) => (
             <div
               key={category.title}
               className={`p-8 rounded-2xl bg-card border border-border hover:border-primary/20 transition-all duration-500 opacity-0 ${
-                isVisible
-                  ? `animate-fade-up stagger-${catIndex + 1}`
-                  : ""
+                isVisible ? `animate-fade-up stagger-${catIndex + 1}` : ""
               }`}
             >
               <div className="flex items-center gap-3 mb-6">

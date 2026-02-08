@@ -11,7 +11,7 @@ const stats = [
 ]
 
 export function About() {
-  const ref = useRef<HTMLDivElement>(null)
+  const ref = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
@@ -42,11 +42,7 @@ export function About() {
                 isVisible ? "animate-fade-up" : ""
               }`}
             >
-              Hi there! I{"'"}m Rakibul Islam, a dedicated MERN stack developer
-              driven by the desire to build seamless, efficient, and impactful
-              web applications. I{"'"}m a lifelong learner, consistently exploring
-              the evolving world of web development to bring the latest
-              innovations into my projects.
+              {"Hi there! I'm Rakibul Islam, a dedicated MERN stack developer driven by the desire to build seamless, efficient, and impactful web applications. I'm a lifelong learner, consistently exploring the evolving world of web development to bring the latest innovations into my projects."}
             </p>
             <p
               className={`text-lg leading-relaxed text-muted-foreground opacity-0 ${
@@ -67,11 +63,7 @@ export function About() {
                 isVisible ? "animate-fade-up stagger-2" : ""
               }`}
             >
-              Outside the realm of coding, I fuel my creativity through
-              exploration -- whether it{"'"}s traveling, reading insightful books,
-              playing cricket, or binge-watching captivating movie series. I{"'"}m
-              always ready to embrace challenges and contribute to meaningful
-              projects.
+              {"Outside the realm of coding, I fuel my creativity through exploration -- whether it's traveling, reading insightful books, playing cricket, or binge-watching captivating movie series. I'm always ready to embrace challenges and contribute to meaningful projects."}
             </p>
           </div>
 
@@ -82,9 +74,7 @@ export function About() {
                 <div
                   key={stat.label}
                   className={`p-6 rounded-xl bg-card border border-border hover:border-primary/30 transition-all duration-300 opacity-0 ${
-                    isVisible
-                      ? `animate-scale-in stagger-${i + 1}`
-                      : ""
+                    isVisible ? `animate-scale-in stagger-${i + 1}` : ""
                   }`}
                 >
                   <div className="text-3xl font-bold text-primary mb-1">

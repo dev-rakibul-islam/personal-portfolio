@@ -2,20 +2,8 @@
 
 import { useEffect, useRef, useState } from "react"
 
-interface SectionHeadingProps {
-  label: string
-  title: string
-  description?: string
-  align?: "left" | "center"
-}
-
-export function SectionHeading({
-  label,
-  title,
-  description,
-  align = "center",
-}: SectionHeadingProps) {
-  const ref = useRef<HTMLDivElement>(null)
+export function SectionHeading({ label, title, description, align = "center" }) {
+  const ref = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
