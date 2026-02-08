@@ -1,199 +1,200 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import {
-  FaDev,
-  FaFacebook,
   FaGithub,
-  FaInstagram,
   FaLinkedinIn,
   FaTwitter,
+  FaFacebook,
 } from "react-icons/fa";
-import { IoMdDownload } from "react-icons/io";
+import { FiArrowDown } from "react-icons/fi";
 
 const Banner = () => {
-  const [isHovered, setIsHovered] = useState(false);
+  const canvasRef = useRef(null);
 
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js";
-    script.async = true;
-    document.body.appendChild(script);
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    let animationId;
+    let particles = [];
 
-    script.onload = () => {
-      window.particlesJS("particles-js", {
-        particles: {
-          number: {
-            value: 80,
-            density: {
-              enable: true,
-              value_area: 800,
-            },
-          },
-          color: {
-            value: "#ffffff",
-          },
-          shape: {
-            type: "circle",
-            stroke: {
-              width: 0,
-              color: "#000000",
-            },
-            polygon: {
-              nb_sides: 5,
-            },
-            image: {
-              src: "img/github.svg",
-              width: 100,
-              height: 100,
-            },
-          },
-          opacity: {
-            value: 0.5,
-            random: false,
-            anim: {
-              enable: false,
-              speed: 1,
-              opacity_min: 0.1,
-              sync: false,
-            },
-          },
-          size: {
-            value: 3,
-            random: true,
-            anim: {
-              enable: false,
-              speed: 40,
-              size_min: 0.1,
-              sync: false,
-            },
-          },
-          line_linked: {
-            enable: true,
-            distance: 150,
-            color: "#ffffff",
-            opacity: 0.4,
-            width: 1,
-          },
-          move: {
-            enable: true,
-            speed: 6,
-            direction: "none",
-            random: false,
-            straight: false,
-            out_mode: "out",
-            bounce: false,
-            attract: {
-              enable: false,
-              rotateX: 600,
-              rotateY: 1200,
-            },
-          },
-        },
-        interactivity: {
-          detect_on: "canvas",
-          events: {
-            onhover: {
-              enable: true,
-              mode: "repulse",
-            },
-            onclick: {
-              enable: true,
-              mode: "push",
-            },
-            resize: true,
-          },
-          modes: {
-            grab: {
-              distance: 400,
-              line_linked: {
-                opacity: 1,
-              },
-            },
-            bubble: {
-              distance: 400,
-              size: 40,
-              duration: 2,
-              opacity: 8,
-              speed: 3,
-            },
-            repulse: {
-              distance: 200,
-              duration: 0.4,
-            },
-            push: {
-              particles_nb: 4,
-            },
-            remove: {
-              particles_nb: 2,
-            },
-          },
-        },
-        retina_detect: true,
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+
+    resize();
+    window.addEventListener("resize", resize);
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.3;
+        this.vy = (Math.random() - 0.5) * 0.3;
+        this.radius = Math.random() * 1.5 + 0.5;
+        this.opacity = Math.random() * 0.4 + 0.1;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(56, 189, 248, ${this.opacity})`;
+        ctx.fill();
+      }
+    }
+
+    const count = Math.min(80, Math.floor((canvas.width * canvas.height) / 15000));
+    for (let i = 0; i < count; i++) {
+      particles.push(new Particle());
+    }
+
+    const drawLines = () => {
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(56, 189, 248, ${0.06 * (1 - dist / 120)})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+    };
+
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((p) => {
+        p.update();
+        p.draw();
       });
+      drawLines();
+      animationId = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    return () => {
+      cancelAnimationFrame(animationId);
+      window.removeEventListener("resize", resize);
     };
   }, []);
 
+  const socialLinks = [
+    { icon: FaLinkedinIn, href: "https://www.linkedin.com/in/rakibul-islam-6258541b4/", label: "LinkedIn" },
+    { icon: FaGithub, href: "https://github.com/ri5257", label: "GitHub" },
+    { icon: FaTwitter, href: "https://x.com/dev_rakib_eb", label: "Twitter" },
+    { icon: FaFacebook, href: "https://www.facebook.com/rakibulislam.eb.rakib/", label: "Facebook" },
+  ];
+
   return (
-    <section className="relative h-screen flex flex-col justify-center items-center p-6 md:p-12 lg:p-20 bg-black text-white">
-      <div id="particles-js" className="absolute inset-0"></div>
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+    >
+      {/* Particle canvas background */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 z-0"
+        aria-hidden="true"
+      />
 
-      <div className="relative z-10 space-y-4 text-center">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-snug">
-          <span className="block text-xl sm:text-2xl">Hi, I'm</span>
-          Rakibul Islam <br />
-          <span className="block text-3xl sm:text-4xl">I'm a</span>
-          <span className="text-yellow-400 text-3xl sm:text-4xl md:text-5xl">
-            Web Developer
-          </span>
-        </h2>
+      {/* Radial glow */}
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-20 pointer-events-none z-0"
+        style={{
+          background: "radial-gradient(circle, rgba(56,189,248,0.15) 0%, transparent 70%)",
+        }}
+        aria-hidden="true"
+      />
 
-        <a
-          href="https://drive.google.com/uc?export=download&id=1Zl-36y9qrqLgP5gkgIABVrcHQSbGl-wp"
-          download
-          className="inline-block"
-        >
-          <button
-            aria-label="My Resume"
-            className="px-6 py-2 mt-3 text-white font-bold text-lg rounded-lg shadow-lg transition-transform transform bg-transparent border-2 border-white hover:scale-105 hover:border-green-600 hover:shadow-green-500/50 hover:shadow-2xl focus:outline-none flex items-center justify-center"
-          >
-            My Resume <IoMdDownload className="ml-2" />
-          </button>
-        </a>
+      <div className="relative z-10 max-w-6xl mx-auto px-6 py-20 lg:py-0">
+        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+          {/* Profile Image */}
+          <div className="flex-shrink-0 animate-fade-up">
+            <div className="relative group">
+              <div
+                className="absolute -inset-1 rounded-full opacity-50 blur-md transition-opacity duration-500 group-hover:opacity-75"
+                style={{
+                  background: "linear-gradient(135deg, rgba(56,189,248,0.4), rgba(56,189,248,0.1))",
+                }}
+                aria-hidden="true"
+              />
+              <div className="relative w-48 h-48 md:w-56 md:h-56 lg:w-72 lg:h-72 rounded-full overflow-hidden border-2 border-slate-700/50 shadow-2xl" style={{ animation: "pulse-glow 4s ease-in-out infinite" }}>
+                <img
+                  src="https://ik.imagekit.io/plateia/Profile%20(1).png"
+                  alt="Rakibul Islam - Web Developer"
+                  className="w-full h-full object-cover"
+                  loading="eager"
+                />
+              </div>
+              {/* Status indicator */}
+              <div className="absolute bottom-4 right-4 flex items-center gap-2 bg-bg-card/90 backdrop-blur-sm px-3 py-1.5 rounded-full border border-slate-700/50">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="text-xs font-medium text-text-secondary">Available</span>
+              </div>
+            </div>
+          </div>
 
-        <div className="flex justify-center space-x-4 mt-6">
-          <a
-            className="text-2xl text-white hover:text-yellow-400 transition-colors"
-            href="https://www.linkedin.com/in/rakibul-islam-6258541b4/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaLinkedinIn />
-          </a>
-          <a
-            className="text-2xl text-white hover:text-yellow-400 transition-colors"
-            href="https://github.com/ri5257"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaGithub />
-          </a>
-          <a
-            className="text-2xl text-white hover:text-yellow-400 transition-colors"
-            href="https://x.com/dev_rakib_eb"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaTwitter />
-          </a>
-          <a
-            className="text-2xl text-white hover:text-yellow-400 transition-colors"
-            href="https://www.facebook.com/rakibulislam.eb.rakib/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaFacebook />
-          </a>
+          {/* Content */}
+          <div className="flex-1 text-center lg:text-left">
+            <p className="animate-fade-up stagger-1 text-accent font-mono text-sm tracking-wide mb-3">
+              Hello, I am
+            </p>
+            <h1 className="animate-fade-up stagger-2 text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-text-primary leading-tight">
+              Rakibul Islam
+            </h1>
+            <h2 className="animate-fade-up stagger-3 mt-3 text-xl sm:text-2xl lg:text-3xl font-medium text-text-secondary">
+              MERN Stack <span className="text-accent">Developer</span>
+            </h2>
+            <p className="animate-fade-up stagger-4 mt-6 max-w-lg text-text-secondary leading-relaxed text-base lg:text-lg mx-auto lg:mx-0">
+              I build accessible, pixel-perfect digital experiences for the web.
+              Passionate about crafting user interfaces that blend thoughtful design
+              with robust engineering.
+            </p>
+
+            {/* Social links */}
+            <div className="animate-fade-up stagger-5 mt-8 flex items-center gap-4 justify-center lg:justify-start">
+              {socialLinks.map(({ icon: Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="group p-3 rounded-lg border border-slate-700/50 text-text-muted hover:text-accent hover:border-accent/30 hover:bg-accent/5 transition-all duration-200 focus-ring"
+                >
+                  <Icon size={18} />
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
+
+      {/* Scroll indicator */}
+      <button
+        onClick={() =>
+          document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })
+        }
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-text-muted hover:text-accent transition-colors cursor-pointer focus-ring rounded-lg p-2"
+        aria-label="Scroll to about section"
+      >
+        <span className="text-xs font-mono tracking-wider uppercase">Scroll</span>
+        <FiArrowDown size={16} className="animate-bounce" />
+      </button>
     </section>
   );
 };

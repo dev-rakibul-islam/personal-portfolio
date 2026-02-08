@@ -1,142 +1,144 @@
 import React from "react";
+import { FiExternalLink, FiGithub } from "react-icons/fi";
+import SectionWrapper from "../../../component/SectionWrapper";
 
 const projects = [
   {
     title: "P-Ticket",
-    image_url: "https://i.ibb.co.com/3ym6DHz/Macbook-Air-ri5257-github-io.png", // Replace with your project homepage image path
-    liveLink: "https://ri5257.github.io/A5-P-Ticket/", // Replace with your project live link
-    githubLink: "https://github.com/username/project1", // Replace with your project GitHub link
-    description: "A brief description of Project 1.",
+    description:
+      "A modern ticket booking and management platform with an intuitive user interface and seamless booking experience.",
+    image: "https://i.ibb.co.com/3ym6DHz/Macbook-Air-ri5257-github-io.png",
+    tags: ["HTML", "CSS", "JavaScript"],
+    liveLink: "https://ri5257.github.io/A5-P-Ticket/",
+    githubLink: "https://github.com/ri5257/A5-P-Ticket",
   },
   {
     title: "TeachLoop",
-    image_url:
+    description:
+      "A comprehensive e-learning platform connecting teachers and students with real-time class management and study materials.",
+    image:
       "https://i.ibb.co.com/s209tf1/Macbook-Air-tangerine-axolotl-4a2446-netlify-app.png",
+    tags: ["React", "Node.js", "MongoDB", "Express", "Firebase"],
     liveLink: "https://tangerine-axolotl-4a2446.netlify.app",
-    githubClientSideLink:
+    githubLink:
       "https://github.com/programming-hero-web-course1/b9a12-client-side-ri5257",
-    githubServerSideLink:
-      "https://github.com/programming-hero-web-course1/b9a12-server-side-ri5257",
-    description: "A brief description of Project 2.",
   },
   {
     title: "LibraEase",
-    image_url:
+    description:
+      "A feature-rich library management system with advanced search, borrowing workflows, and user dashboards.",
+    image:
       "https://i.ibb.co.com/qFTXW7m/Macbook-Air-b9-a11-assignment-web-app.png",
+    tags: ["React", "Node.js", "MongoDB", "Express", "Firebase"],
     liveLink: "https://b9-a11-assignment.web.app",
-    githubClientSideLink:
+    githubLink:
       "https://github.com/Porgramming-Hero-web-course/b9a11-client-side-ri5257",
-    githubServerSideLink:
-      "https://github.com/Porgramming-Hero-web-course/b9a11-server-side-ri5257",
-    description: "A brief description of Project 2.",
   },
 ];
 
 const Projects = () => {
   return (
-    <section id="projects" className="py-12 bg-gray-900">
-      <div className="container mx-auto px-4">
-        <h2 className="text-4xl text-white font-bold text-center mb-8">
-          My Projects
-        </h2>
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <SectionWrapper id="projects">
+      <div className="max-w-5xl">
+        <h2 className="section-heading">Projects</h2>
+        <h3 className="text-3xl sm:text-4xl font-bold text-text-primary mb-12 leading-tight text-balance">
+          Selected <span className="text-accent">work</span>
+        </h3>
+
+        <div className="space-y-16">
           {projects.map((project, index) => (
-            <div
-              key={index}
-              className="bg-black border-2 rounded-3xl px-2 py-7 shadow-lg overflow-hidden"
+            <article
+              key={project.title}
+              className="group"
             >
-              <img
-                src={project.image_url}
-                alt={`${project.title} homepage`}
-                className="w-full p-4 object-cover"
-              />
-              <div className="p-6">
-                <h3 className="text-2xl text-white font-semibold mb-4">
-                  {project.title}
-                </h3>
-                <p className="text-gray-200  mb-4">{project.description}</p>
-                <div className="flex justify-between">
-                  <a
-                    href={project.githubClientSideLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-500 hover:text-blue-700 font-semibold"
-                  >
-                    <button class="relative inline-flex h-12 active:scale-95 transistion overflow-hidden rounded-lg p-[1px] focus:outline-none">
-                      <span class="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#e7029a_0%,#f472b6_50%,#bd5fff_100%)]"></span>
-                      <span class="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-slate-950 px-7 text-sm font-medium text-white backdrop-blur-3xl gap-2 undefined">
-                        Client Side
-                        <svg
-                          stroke="currentColor"
-                          fill="currentColor"
-                          stroke-width="0"
-                          viewBox="0 0 448 512"
-                          height="1em"
-                          width="1em"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path d="M429.6 92.1c4.9-11.9 2.1-25.6-7-34.7s-22.8-11.9-34.7-7l-352 144c-14.2 5.8-22.2 20.8-19.3 35.8s16.1 25.8 31.4 25.8H224V432c0 15.3 10.8 28.4 25.8 31.4s30-5.1 35.8-19.3l144-352z"></path>
-                        </svg>
-                      </span>
-                    </button>
-                  </a>
-                  <a
-                    href={project.githubServerSideLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-500 hover:text-blue-700 font-semibold"
-                  >
-                    <button class="relative inline-flex h-12 active:scale-95 transistion overflow-hidden rounded-lg p-[1px] focus:outline-none">
-                      <span class="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#e7029a_0%,#f472b6_50%,#bd5fff_100%)]"></span>
-                      <span class="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-slate-950 px-7 text-sm font-medium text-white backdrop-blur-3xl gap-2 undefined">
-                        Server Side
-                        <svg
-                          stroke="currentColor"
-                          fill="currentColor"
-                          stroke-width="0"
-                          viewBox="0 0 448 512"
-                          height="1em"
-                          width="1em"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path d="M429.6 92.1c4.9-11.9 2.1-25.6-7-34.7s-22.8-11.9-34.7-7l-352 144c-14.2 5.8-22.2 20.8-19.3 35.8s16.1 25.8 31.4 25.8H224V432c0 15.3 10.8 28.4 25.8 31.4s30-5.1 35.8-19.3l144-352z"></path>
-                        </svg>
-                      </span>
-                    </button>
-                  </a>
-                </div>
-                <div className="mt-3 flex justify-center items-center">
+              <div
+                className={`flex flex-col ${
+                  index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
+                } gap-8 items-center`}
+              >
+                {/* Image */}
+                <div className="flex-1 w-full">
                   <a
                     href={project.liveLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-500 hover:text-blue-700 font-semibold"
+                    className="block overflow-hidden rounded-xl border border-slate-800/50 bg-bg-card/30 focus-ring"
                   >
-                    <button class="relative inline-flex h-12 active:scale-95 transistion overflow-hidden rounded-lg p-[1px] focus:outline-none">
-                      <span class="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#e7029a_0%,#f472b6_50%,#bd5fff_100%)]"></span>
-                      <span class="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-slate-950 px-7 text-sm font-medium text-white backdrop-blur-3xl gap-2 undefined">
-                        Live Preview
-                        <svg
-                          stroke="currentColor"
-                          fill="currentColor"
-                          stroke-width="0"
-                          viewBox="0 0 448 512"
-                          height="1em"
-                          width="1em"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path d="M429.6 92.1c4.9-11.9 2.1-25.6-7-34.7s-22.8-11.9-34.7-7l-352 144c-14.2 5.8-22.2 20.8-19.3 35.8s16.1 25.8 31.4 25.8H224V432c0 15.3 10.8 28.4 25.8 31.4s30-5.1 35.8-19.3l144-352z"></path>
-                        </svg>
-                      </span>
-                    </button>
+                    <div className="relative overflow-hidden">
+                      <img
+                        src={project.image}
+                        alt={`${project.title} preview`}
+                        className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </div>
                   </a>
                 </div>
+
+                {/* Content */}
+                <div className="flex-1 w-full">
+                  <p className="text-accent font-mono text-sm mb-2">
+                    Featured Project
+                  </p>
+                  <h4 className="text-2xl font-bold text-text-primary mb-3 group-hover:text-accent transition-colors duration-200">
+                    {project.title}
+                  </h4>
+                  <div className="p-5 rounded-xl bg-bg-card/50 border border-slate-800/50 mb-4">
+                    <p className="text-text-secondary text-sm leading-relaxed">
+                      {project.description}
+                    </p>
+                  </div>
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-3 py-1 text-xs font-mono text-accent bg-accent/10 rounded-full border border-accent/20"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Links */}
+                  <div className="flex items-center gap-4">
+                    <a
+                      href={project.githubLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${project.title} GitHub repository`}
+                      className="p-2.5 rounded-lg text-text-muted hover:text-accent hover:bg-accent/5 border border-slate-800/50 hover:border-accent/30 transition-all duration-200 focus-ring"
+                    >
+                      <FiGithub size={18} />
+                    </a>
+                    <a
+                      href={project.liveLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${project.title} live preview`}
+                      className="p-2.5 rounded-lg text-text-muted hover:text-accent hover:bg-accent/5 border border-slate-800/50 hover:border-accent/30 transition-all duration-200 focus-ring"
+                    >
+                      <FiExternalLink size={18} />
+                    </a>
+                    <a
+                      href={project.liveLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="ml-auto inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-accent border border-accent/30 rounded-lg hover:bg-accent/10 transition-all duration-200 focus-ring"
+                    >
+                      View Live
+                      <FiExternalLink size={14} />
+                    </a>
+                  </div>
+                </div>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>
-    </section>
+    </SectionWrapper>
   );
 };
 
